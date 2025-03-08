@@ -34,6 +34,33 @@ module.exports = {
           80: "#1F2937",
           90: "#111827",
         },
+         blue: {
+          0: "#FFFFFF",
+          5: "#F0F9FF",
+          10: "#E0F2FE",
+          20: "#BAE6FD",
+          30: "#7DD3FC",
+          40: "#38BDF8",
+          50: "#0EA5E9",
+          60: " #000EDD",
+          70: " #457B9D",
+          80: " #023047",
+          90: " #004ee9",
+        },
+         orange: {
+          0: "#FFFFFF",
+          5: "#FFF7ED",
+          10: "#FFEDD5",
+          20: "#FED7AA",
+          30: "#FDBA74",
+          40: "#FB923C",
+          50: "#F97316",
+          60: "#FF5003",
+          70: " #FF5C00",
+          80: " #9A3412",
+          90: " #FB8500",
+        },
+
       },
       borderRadius: {
         none: "0px",
@@ -60,6 +87,7 @@ module.exports = {
       },
       fontFamily: {
         sans: [
+           "Arial",
           "Inter",
           "-apple-system",
           "BlinkMacSystemFont",
@@ -68,6 +96,7 @@ module.exports = {
           "Helvetica Neue",
           "Ubuntu",
           "sans-serif",
+         
         ],
       },
       keyframes: {
