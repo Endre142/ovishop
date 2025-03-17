@@ -12,18 +12,18 @@ export default async function Footer() {
   const productCategories = await listCategories()
 
   return (
-    <footer className="border-t  w-full bg-blue-60">
+    <footer className=" w-full py-10 border-t bg-gray_combination-head_foot" >
       <div className="content-container flex flex-col w-full">
-        <div className="flex flex-col gap-y-6 xsmall:flex-row items-start justify-between py-40">
+        <div className="flex flex-col gap-y-6 xsmall:flex-row items-start justify-between">
           <div >
             <LocalizedClientLink
               href="/"
-              className="txt-compact-xlarge-plus text-orange-70  hover:text-ui-fg-base uppercase "
+              className="txt-compact-xlarge-plus hover:text-ui-fg-base uppercase "
             >
-              Ovi uzlete
+              Ovi Shop
             </LocalizedClientLink>
           </div>
-          <div className="text-small-regular gap-10 md:gap-x-16 grid grid-cols-2 sm:grid-cols-3 text-orange-70">
+          {/* <div className="text-small-regular gap-10 md:gap-x-16 grid grid-cols-2 sm:grid-cols-3 text-orange-70">
             {productCategories && productCategories?.length > 0 && (
               <div className="flex flex-col gap-y-2">
                 <span className="txt-small-plus txt-ui-fg-base">
@@ -83,9 +83,9 @@ export default async function Footer() {
               </div>
             )}
             
-          </div>
+          </div> */}
         </div>
-      
+
       </div>
     </footer>
   )

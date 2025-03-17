@@ -34,7 +34,7 @@ module.exports = {
           80: "#1F2937",
           90: "#111827",
         },
-         blue: {
+        blue: {
           0: "#FFFFFF",
           5: "#F0F9FF",
           10: "#E0F2FE",
@@ -42,12 +42,28 @@ module.exports = {
           30: "#7DD3FC",
           40: "#38BDF8",
           50: "#0EA5E9",
-          60: " #000EDD",
-          70: " #457B9D",
-          80: " #023047",
-          90: " #004ee9",
+          60: "#000EDD",
+          70: "#457B9D",
+          80: "#023047",
+          90: "#004ee9",
+
         },
-         orange: {
+
+        oceanBlue: {
+          0: "#FFFFFF",
+          5: "#F0F9FF",
+          10: "#E0F2FE",
+          20: "#BAE6FD",
+          30: "#7DD3FC",
+          40: "#38BDF8",
+          50: "#0EA5E9",
+          60: "#1A1A2E",
+          70: "#16213E",
+          80: "#0F3460",
+          90: "#004ee9",
+        },
+
+        orange: {
           0: "#FFFFFF",
           5: "#FFF7ED",
           10: "#FFEDD5",
@@ -56,11 +72,29 @@ module.exports = {
           40: "#FB923C",
           50: "#F97316",
           60: "#FF5003",
-          70: " #FF5C00",
-          80: " #9A3412",
-          90: " #FB8500",
+          70: "#FF5C00",
+          80: "#9A3412",
+          90: "#FB8500",
         },
-
+        four_color: {
+          //back: "#60A5FA",
+          //back:"#1D4ED8",
+          back: "#4A90E2",
+          text_fontcol: "#9CA3AF",
+          text_fontcol_2: "#B0BEC5",
+          button_col: "#3B82F6",
+          button_col_hovercol: "#1E40AF",
+        },
+        gray_combination: {
+          back: "#565455",
+          text1: "#1F2937",
+          text2: "#6B7280",
+          button_col: "#1E40AF",
+          button_col_hover: "#3B82F6",
+          button_col_hover2: "#F97316",
+          head_foot: "#111827",
+          product_back: "#FFFFFF",
+        },
       },
       borderRadius: {
         none: "0px",
@@ -87,7 +121,7 @@ module.exports = {
       },
       fontFamily: {
         sans: [
-           "Arial",
+          "Arial",
           "Inter",
           "-apple-system",
           "BlinkMacSystemFont",
@@ -96,7 +130,7 @@ module.exports = {
           "Helvetica Neue",
           "Ubuntu",
           "sans-serif",
-         
+
         ],
       },
       keyframes: {

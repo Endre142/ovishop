@@ -6,6 +6,7 @@ checkEnvVariables()
  * @type {import('next').NextConfig}
  */
 const nextConfig = {
+  devIndicators: false ,
   reactStrictMode: true,
   logging: {
     fetches: {

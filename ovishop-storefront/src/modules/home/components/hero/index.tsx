@@ -1,62 +1,56 @@
 import { Github } from "@medusajs/icons"
 import { Button, Heading } from "@medusajs/ui"
 
+import "./hero.css"
+import { url } from "inspector"
+
+
+
 const Hero = () => {
   return (
-    <div className="relative h-[75vh] w-full border-b border-ui-border-base bg-blue-60 ">
-      
-      <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center p-4 sm:p-8 md: gap-6">
-        <h3 className="text_fontFamily-sans text-2xl  text-orange-70">Fizikai Bolt</h3>
-        <p className="text-base text-orange-70">
-          
-          Helyszín: 1234 Budapest, Példa utca 12.<br />{/* atirni normalis adatokra */}
+
+
+    <div className="flex flex-col flex-grow justify-center items-center w-full h-full">
+      <div id="product_search" className="relative w-full h-[300px]">
+        <img src="/Image/hero_banner-300logo.png"
+          alt="Hero First"
+          className="w-full
+           h-full object-cover"
+        />
+      </div>
+      <div className="text-center p-4 sm:p-8">
+        <h3 className="text-2xl  font-bold text-gray_combination-text1">Fizikai Bolt</h3>
+        <p className="text-base  mt-2">
+          Helyszín: 1234 Budapest, Példa utca 12.
         </p>
-        <div className="overflow-x-auto w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl ">
-          <table className="table-auto border-collapse w-full text-left text-orange-70">
-            <thead>
-              <tr><td colSpan={2} className="border-b p-2 text-center text">Ebédszünet minden nap 12:00–12:30 között</td></tr>
-              <tr>
-                <th className="border-b p-2 ">Nap</th>
-                <th className="border-b p-2">Nyitvatartás</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td className="border-b p-2">Hétfő</td>
-                <td className="border-b p-2">09:00 – 18:00</td>
-              </tr>
-              <tr>
-                <td className="border-b p-2">Kedd</td>
-                <td className="border-b p-2">09:00 – 18:00</td>
-              </tr>
-              <tr>
-                <td className="border-b p-2">Szerda</td>
-                <td className="border-b p-2">09:00 – 18:00</td>
-              </tr>
-              <tr>
-                <td className="border-b p-2">Csütörtök</td>
-                <td className="border-b p-2">09:00 – 18:00</td>
-              </tr>
-              <tr>
-                <td className="border-b p-2">Péntek</td>
-                <td className="border-b p-2">09:00 – 18:00</td>
-              </tr>
-              <tr>
-                <td className="border-b p-2">Szombat</td>
-                <td className="border-b p-2">Zárva</td>
-              </tr>
-              <tr>
-                <td className="border-b p-2">Vasárnap</td>
-                <td className="border-b p-2">Zárva</td>   
-              </tr>
-               {/* className="border-b p-2" itt miert kell mindenhova beirni? */}
-            </tbody>
-          </table>
-        </div>
+
+        <table className="table-auto border-collapse w-full max-w-md mx-auto text-left mt-4 nyt" >
+          <thead>
+            <tr>
+              <td colSpan={2} className="border-b p-2 text-center text ">
+                Ebédszünet minden nap 12:00–12:30 között
+              </td>
+            </tr>
+            <tr className="text-gray_combination-text1">
+              <th>Nap</th>
+              <th>Nyitvatartás</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Hétfő</td><td>09:00 – 18:00</td></tr>
+            <tr><td>Kedd</td><td>09:00 – 18:00</td></tr>
+            <tr><td>Szerda</td><td>09:00 – 18:00</td></tr>
+            <tr><td>Csütörtök</td><td>09:00 – 18:00</td></tr>
+            <tr><td>Péntek</td><td>09:00 – 18:00</td></tr>
+            <tr><td>Szombat</td><td>Zárva</td></tr>
+            <tr><td>Vasárnap</td><td>Zárva</td></tr>
+          </tbody>
+        </table>
+
       </div>
     </div>
   )
 }
 
-export default Hero
+export default Hero;
 
