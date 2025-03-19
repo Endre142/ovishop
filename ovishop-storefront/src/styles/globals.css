@@ -220,13 +220,12 @@ Remove the default font size and weight for headings.
 */
 
 h1,
-/*  h3,*/
+h3,
 h2,
 h4,
 h5,
 h6 {
-  font-size: inherit;
-  font-weight: inherit;
+
   @apply text-gray_combination-text1;
 }
 
@@ -926,12 +925,9 @@ video {
 }
 
 .content-container {
-  margin-left: auto;
-  margin-right: auto;
   width: 100%;
-  max-width: 1440px;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
+  /* padding-left: 1.5rem; */
+  /* padding-right: 1.5rem; */
 }
 
 .text-small-regular {

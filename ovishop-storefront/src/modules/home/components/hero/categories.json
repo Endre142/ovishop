@@ -1,0 +1,74 @@
+[
+    {
+        "id": 1,
+        "name": "A motor és kuplung komponensek",
+        "image": "/Image/Categories/motor.png",
+        "url": "/kategoriak/motor-kuplung"
+    },
+    {
+        "id": 2,
+        "name": "Kipufogórendszerek",
+        "image": "/Image/Categories/kipufogo.png",
+        "url": "/kategoriak/kipufogo"
+    },
+    {
+        "id": 3,
+        "name": "Felnik és gumiabroncsok",
+        "image": "/Image/Categories/gumik.png",
+        "url": "/kategoriak/felni-gumi"
+    },
+    {
+        "id": 4,
+        "name": "Hűtőrendszer és hűtőfolyadék",
+        "image": "/Image/Categories/huto.png",
+        "url": "/kategoriak/hutorendszer"
+    },
+    {
+        "id": 5,
+        "name": "Elektromos alkatrészek és akkumulátor",
+        "image": "/Image/Categories/elektromos.png",
+        "url": "/kategoriak/elektromos-alkatreszek"
+    },
+    {
+        "id": 6,
+        "name": "Szűrők",
+        "image": "/Image/Categories/szurok.png",
+        "url": "/kategoriak/szurok"
+    },
+    {
+        "id": 7,
+        "name": "Felfüggesztés",
+        "image": "/Image/Categories/felfugesztes.png",
+        "url": "/kategoriak/felfuggesztes"
+    },
+    {
+        "id": 8,
+        "name": "Karosszéria elemek",
+        "image": "/Image/Categories/karosszeria.png",
+        "url": "/kategoriak/karosszeria"
+    },
+    {
+        "id": 9,
+        "name": "Olajok, folyadékok és szerviz kellékek",
+        "image": "/Image/Categories/olajok.png",
+        "url": "/kategoriak/olajok-folyadekok"
+    },
+    {
+        "id": 10,
+        "name": "Sebességváltó, hajtáslánc",
+        "image": "/Image/Categories/sebvalto.png",
+        "url": "/kategoriak/sebessegvalto"
+    },
+    {
+        "id": 11,
+        "name": "Fékrendszer",
+        "image": "/Image/Categories/fek.png",
+        "url": "/kategoriak/fekrendszer"
+    },
+    {
+        "id": 12,
+        "name": "Ápolás, karbantartás, spray-k",
+        "image": "/Image/Categories/autoapolas.png",
+        "url": "/kategoriak/apolas-karbantartas"
+    }
+]

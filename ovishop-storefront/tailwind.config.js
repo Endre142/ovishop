@@ -94,6 +94,7 @@ module.exports = {
           button_col_hover2: "#F97316",
           head_foot: "#176881",//"#111827",
           product_back: "#FFFFFF",
+          alma: "#a8a8a8",
         },
       },
       borderRadius: {
