@@ -20,6 +20,14 @@ module.exports = {
         visibility: "visibility",
         padding: "padding-top padding-right padding-bottom padding-left",
       },
+      translate: {
+        10: "10px",
+        20: "20px",
+        30: "30px",
+        40: "40px",
+        50: "50px",
+        60: "60px",
+      },
       colors: {
         grey: {
           0: "#FFFFFF",

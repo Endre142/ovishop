@@ -1,0 +1,19 @@
+{
+    "SideMenuItems": {
+        "Kezdőlap": "/",
+        "Fiók": "/account",
+        "Kosár": "/cart",
+        "Globális áruház": "/store",
+        "Globális keresés": "/search"
+    },
+    "LanguegeMenuItems": {
+        "Magyar": "hu",
+        "English": "en",
+        "Román": "ro"
+    },
+    "flags": {
+        "hu": "🇭🇺",
+        "en": "🇬🇧",
+        "ro": "🇷🇴"
+    }
+}

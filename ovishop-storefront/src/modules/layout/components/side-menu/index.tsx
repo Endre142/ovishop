@@ -1,206 +1,172 @@
-// "use client"
-
-// import { Popover, PopoverPanel, Transition } from "@headlessui/react"
-// import { ArrowRightMini, XMark } from "@medusajs/icons"
-// import { Text, clx, useToggleState } from "@medusajs/ui"
-// import { Fragment } from "react"
-
-// import LocalizedClientLink from "@modules/common/components/localized-client-link"
-// import CountrySelect from "../country-select"
-// import { HttpTypes } from "@medusajs/types"
-
-// const SideMenuItems = {
-//   Home: "/",
-//   Store: "/store",
-//   Category: "/categories",
-//   Account: "/account",
-//   //Cart: "/cart",
-//   Search: "/search",
-// }
-
-// const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
-//   const toggleState = useToggleState()
-
-//   return (
-//     <div className="h-full">
-//       <div className="flex items-center h-full">
-//         <Popover className="h-full flex">
-//           {({ open, close }) => (
-//             <>
-//               <div className="relative flex h-full ">
-//                 <Popover.Button
-//                   data-testid="nav-menu-button"
-//                   className="relative h-full flex items-center transition-all ease-out duration-200 focus:outline-none bg-gray_combination-button_col px-4 sm:px-6  hover:bg-gray_combination-button_col_hover"
-//                 >
-//                   Menu
-//                 </Popover.Button>
-//               </div>
-
-//               <Transition
-//                 show={true}
-//                 as={Fragment}
-//                 enter="transition ease-out duration-150"
-//                 enterFrom="opacity-0"
-//                 enterTo="opacity-100 backdrop-blur-2xl"
-//                 leave="transition ease-in duration-150"
-//                 leaveFrom="opacity-100 backdrop-blur-2xl"
-//                 leaveTo="opacity-0"
-//               >
-//                 <PopoverPanel className="flex flex-col absolute w-full pr-4 sm:pr-0 sm:w-1/3 2xl:w-1/4 sm:min-w-min h-[calc(100vh-1rem)] z-30 inset-x-0 text-sm text-ui-fg-on-color m-2 backdrop-blur-2xl">
-//                   <div
-//                     data-testid="nav-menu-popup"
-//                     className="flex flex-col h-full bg-[rgba(3,7,18,0.5)] rounded-rounded justify-between p-6"
-//                   >
-//                     <div className="flex justify-end" id="xmark">
-//                       <button data-testid="close-menu-button" onClick={close}>
-//                         <XMark />
-//                       </button>
-//                     </div>
-//                     <ul className="flex flex-col gap-6 items-start justify-start">
-//                       {Object.entries(SideMenuItems).map(([name, href]) => {
-//                         return (
-//                           <li key={name}>
-//                             <LocalizedClientLink
-//                               href={href}
-//                               className="text-3xl leading-10 hover:text-ui-fg-disabled"
-//                               onClick={close}
-//                               data-testid={`${name.toLowerCase()}-link`}
-//                             >
-//                               {name}
-//                             </LocalizedClientLink>
-//                           </li>
-//                         )
-//                       })}
-//                     </ul>
-//                     <div className="flex flex-col gap-y-6">
-//                       <div
-//                         className="flex justify-between"
-//                         onMouseEnter={toggleState.open}
-//                         onMouseLeave={toggleState.close}
-//                       >
-//                         {regions && (
-//                           <CountrySelect
-//                             toggleState={toggleState}
-//                             regions={regions}
-//                           />
-//                         )}
-//                         <ArrowRightMini
-//                           className={clx(
-//                             "transition-transform duration-150",
-//                             toggleState.state ? "-rotate-90" : ""
-//                           )}
-//                         />
-//                       </div>
-//                       <Text className="flex justify-between txt-compact-small">
-//                         © {new Date().getFullYear()} Ovi Store. Hight Quality
-//                         reserved.
-//                       </Text>
-//                     </div>
-//                   </div>
-//                 </PopoverPanel>
-//               </Transition>
-//             </>
-//           )}
-//         </Popover>
-//       </div>
-//     </div>
-//   )
-// }
-
-// export default SideMenu
-
-
-
 "use client"
 
-import { useEffect, useState } from "react"
-import { ArrowRightMini, XMark, BarsThree } from "@medusajs/icons" // Hamburger ikon
+import { useEffect, useState, useRef } from "react"
+import { ArrowRightMini, XMark, BarsThree, ChevronDown } from "@medusajs/icons"
 import { Text, clx, useToggleState } from "@medusajs/ui"
-
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import CountrySelect from "../country-select"
 import { HttpTypes } from "@medusajs/types"
+import menuData from "./menuItems.json"
 
-const SideMenuItems = {
-  Home: "/",
-  Store: "/store",
-  Category: "/categories",
-  Account: "/account",
-  Search: "/search",
-}
+// Típusdefiníciók
+type LanguageCode = "hu" | "en" | "ro";
+
+type Flags = Record<LanguageCode, string>;
+
+type MenuData = {
+  SideMenuItems: Record<string, string>;
+  LanguegeMenuItems: Record<string, string>;
+  flags: Flags;
+};
 
 const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
-  const [open, setOpen] = useState(false) // Menü nyitva/zárva
+  const [open, setOpen] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+  const [menuHeight, setMenuHeight] = useState(0)
+  const menuRef = useRef<HTMLDivElement>(null)
+  const buttonRef = useRef<HTMLButtonElement>(null)
+  const [languege, setLanguege] = useState<LanguageCode>("hu")
+  const [languegeMenuOpen, setLanguegeMenuOpen] = useState(false)
   const toggleState = useToggleState()
 
   useEffect(() => {
-    if (open) {
-      document.body.classList.add('side-menu-open')
-    } else {
-      document.body.classList.remove('side-menu-open')
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768) // 768px alatt mobil, felette asztali
+      const header = document.querySelector("header")
+      const headerHeight = header ? header.offsetHeight : 16
+      setMenuHeight(window.innerHeight - headerHeight)
+    }
+    handleResize()
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
+  }, [])
+
+  // Menü nyitása/zárása
+  useEffect(() => {
+    if (!isMobile) {
+      if (open) {
+        document.body.classList.add('side-menu-open')
+      } else {
+        document.body.classList.remove('side-menu-open')
+      }
     }
   }, [open])
+
+  useEffect(() => {
+    const handleMouseMove = (event: MouseEvent) => {
+      if (!isMobile && open) {
+        const isInsideMenu = menuRef.current?.contains(event.target as Node)
+        const isInsideButton = buttonRef.current?.contains(event.target as Node)
+
+
+        if (!isInsideMenu && !isInsideButton) {
+          setOpen(false)
+        }
+      }
+    }
+    document.addEventListener("mousemove", handleMouseMove)
+    return () => document.removeEventListener("mousemove", handleMouseMove)
+  }, [open, isMobile])
+
+  const handleLanguageSelect = (code: LanguageCode) => {
+    setLanguege(code);
+    setLanguegeMenuOpen(false);
+    console.log(`Kiválasztott nyelv: ${code}`);
+  };
 
   return (
     <div className="relative h-full">
       {/* Menü gomb */}
       <button
-        onClick={() => setOpen(!open)}
-        // onMouseEnter={() => setOpen((prev) => !prev)}
-        className="relative h-full flex items-center justify-center transition-all ease-out duration-200 focus:outline-none bg-gray_combination-button_col px-4 sm:px-4 hover:bg-gray_combination-button_col_hover z-40 gap-2"
+        ref={buttonRef}
+        onClick={() => {
+          if (isMobile) {
+            setOpen(!open)
+          }
+        }}
+        onMouseEnter={() => {
+          if (!isMobile) {
+            setOpen(true)
+          }
+        }}
+        className="relative h-full flex items-center justify-center focus:outline-none px-4 sm:px-4 hover:text-gray_combination-button_col_hover"
       >
-        {open ? "Menu" : <BarsThree className="items-center w-6 h-6 " />} {/* Ha nyitva, Menu szöveg, ha zárva, ikon */}
+        {!isMobile ? "Menü" : <BarsThree className="items-center w-6 h-6" />}
       </button>
 
       {/* Oldalsó menü BALRÓL */}
       <div
+        ref={menuRef}
+        style={{ height: isMobile ? "" : `${menuHeight}px` }}
         className={clx(
-          "fixed top-15 left-0 h-full w-[300px] bg-[rgba(3,7,18,0.95)] text-white z-50 p-6  shadow-lg",
+          "fixed top-16 left-0 bg-gray_combination-head_foot text-text1 p-6 shadow-lg flex flex-col",
           "transform transition-transform duration-300",
-          open ? "translate-x-0" : "-translate-x-full"
+          open ? "translate-x-0" : "-translate-x-full", // Menü megjelenik/eltűnik
+          isMobile ? "w-full h-content" : "w-[300px]"
         )}
       >
-        {/* Bezáró gomb */}
-        <div className="flex justify-end">
-          <button onClick={() => setOpen(false)}>
-            <XMark className="w-8 h-8" />
-          </button>
+        {/* Menü tartalma (kitölti a rendelkezésre álló helyet) */}
+        <div className="flex-1">
+          <ul className="flex flex-col gap-6 items-start mt-8">
+            {Object.entries(menuData.SideMenuItems).map(([name, href]) => (
+              <li key={name}>
+                <LocalizedClientLink
+                  href={href}
+                  className="text-2xl leading-10 hover:text-gray_combination-button_col_hover"
+                >
+                  {name}
+                </LocalizedClientLink>
+              </li>
+            ))}
+          </ul>
         </div>
 
-        {/* Menü elemek */}
-        <ul className="flex flex-col gap-6 items-start mt-8">
-          {Object.entries(SideMenuItems).map(([name, href]) => (
-            <li key={name}>
-              <LocalizedClientLink
-                href={href}
-                className="text-2xl leading-10 hover:text-gray-400"
-                onClick={() => setOpen(false)} // Menü záródik linkre kattintva
-              >
-                {name}
-              </LocalizedClientLink>
-            </li>
-          ))}
-        </ul>
-
-        {/* Országválasztó és copyright */}
-        <div className="flex flex-col gap-y-6 mt-auto pt-10">
-          <div
-            className="flex justify-between items-center cursor-pointer"
-            onMouseEnter={toggleState.open}
-            onMouseLeave={toggleState.close}
-          >
-            {regions && (
-              <CountrySelect toggleState={toggleState} regions={regions} />
-            )}
-            <ArrowRightMini
+        {/* Nyelvi választó és copyright (a menü alján) */}
+        <div className="mt-auto">
+          <div className="mb-4 relative">
+            {/* Label és gomb elcsúsztatása */}
+            <div
               className={clx(
-                "transition-transform duration-150",
-                toggleState.state ? "-rotate-90" : ""
+                "transition-transform duration-300",
+                !isMobile ? (languegeMenuOpen ? "-translate-y-[110px]" : "translate-y-0") : ""// Elcsúszás felfelé, ha a menü nyitva
               )}
-            />
+            >
+              <label className="pr-8">Nyelv</label>
+              {/* Nyelvi választó gomb */}
+              <div>
+                <button
+                  onClick={() => setLanguegeMenuOpen(!languegeMenuOpen)}
+                  className="bg-gray_combination-alma pr-6 pl-6 w-full text-left flex items-center justify-between"
+                >
+                  <span>
+                    {menuData.flags[languege]} {/* Zászló megjelenítése */}
+                    {Object.entries(menuData.LanguegeMenuItems).find(([_, code]) => code === languege)?.[0]}
+                  </span>
+                  <ChevronDown className="w-4 h-4" /> {/* Lefele nyílacska */}
+                </button>
+              </div>
+
+              {/* Nyelvi menü */}
+              {languegeMenuOpen && (
+                <div className="absolute top-full left-0 w-full bg-gray_combination-alma shadow-lg"
+                  onMouseLeave={() => setLanguegeMenuOpen(false)}>
+                  {Object.entries(menuData.LanguegeMenuItems).map(([name, code]) => (
+                    <div
+                      key={code}
+                      onClick={() => handleLanguageSelect(code as LanguageCode)} // Típusbiztos kiválasztás
+                      className="p-2 hover:bg-gray_combination-button_col_hover cursor-pointer"
+                    >
+                      {menuData.flags[code as LanguageCode]} {name} {/* Zászló megjelenítése */}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
+
+          {/* Copyright */}
           <Text className="flex justify-between txt-compact-small text-gray-400">
-            © {new Date().getFullYear()} Ovi Store. High Quality reserved.
+            © 2025 Ovi Store. High Quality reserved.
           </Text>
         </div>
       </div>

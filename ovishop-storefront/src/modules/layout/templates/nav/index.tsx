@@ -11,8 +11,8 @@ export default async function Nav() {
 
   return (
     <div className="sticky top-0 inset-x-0 z-50 group bg-gray_combination-head_foot">
-      <header className="relative h-16 mx-auto  duration-200  border-ui-border-base">
-        <nav className="content-container txt-xsmall-plus flex items-center justify-between w-full h-full text-base-regular" >
+      <header className="relative h-16  mx-auto  duration-200  ">
+        <nav className="content-container  flex items-center justify-between w-full h-full text-large-regular" >
           <div className="flex-1 basis-0 h-full flex items-center">
             <div className="h-full">
               <SideMenu regions={regions} />
@@ -31,29 +31,33 @@ export default async function Nav() {
             </h1>
           </div>
 
-          <div className="flex items-center gap-x-6 h-full flex-1 basis-0 justify-end">
-            <div className="hidden small:flex items-center gap-x-6 h-full">
+          <div className="flex items-center gap-x-6 h-full flex-1 basis-0 justify-end text-large-regular">
+            <div className="hidden small:flex items-center gap-x-6 h-full  ">
               <LocalizedClientLink
-                className="hover:text-ui-fg-base"
+                className="hover:text-gray_combination-button_col_hover"
                 href="/account"
                 data-testid="nav-account-link"
               >
-                Account
+                Fiók
               </LocalizedClientLink>
             </div>
-            <Suspense
-              fallback={
-                <LocalizedClientLink
-                  className="hover:text-ui-fg-base flex gap-2"
-                  href="/cart"
-                  data-testid="nav-cart-link"
-                >
-                  Cart (0)
-                </LocalizedClientLink>
-              }
-            >
-              <CartButton />
-            </Suspense>
+            <div className="pr-8">
+
+              <Suspense
+                fallback={
+                  <LocalizedClientLink
+                    className="hover:text-gray_combination-button_col_hover flex gap-2 "
+                    href="/cart"
+                    data-testid="nav-cart-link"
+                  >
+                    Kosár (0)
+                  </LocalizedClientLink>
+                }
+              >
+                <CartButton />
+              </Suspense>
+            </div>
+
           </div>
         </nav>
       </header>
