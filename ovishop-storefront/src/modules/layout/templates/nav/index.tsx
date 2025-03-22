@@ -15,7 +15,7 @@ export default async function Nav() {
         <nav className="content-container  flex items-center justify-between w-full h-full text-large-regular" >
           <div className="flex-1 basis-0 h-full flex items-center">
             <div className="h-full">
-              <SideMenu regions={regions} />
+              <SideMenu />
             </div>
           </div>
 
@@ -31,7 +31,7 @@ export default async function Nav() {
             </h1>
           </div>
 
-          <div className="flex items-center gap-x-6 h-full flex-1 basis-0 justify-end text-large-regular">
+          <div className="flex items-center gap-x-6 h-full flex-1 basis-0 justify-end text-large-regular sm:text-small-regular">
             <div className="hidden small:flex items-center gap-x-6 h-full  ">
               <LocalizedClientLink
                 className="hover:text-gray_combination-button_col_hover"

@@ -19,7 +19,7 @@ type MenuData = {
   flags: Flags;
 };
 
-const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
+const SideMenu = () => {
   const [open, setOpen] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const [menuHeight, setMenuHeight] = useState(0)
